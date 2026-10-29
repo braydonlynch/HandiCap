@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#102b22">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HandiCap">
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link rel="stylesheet" href="./styles.css">
+
+    <title>HandiCap</title>
+    <script src="./app.js" defer></script>
+</head>
+<body>
+
+<header class="app-header">
+    <div class="brand">
+        <span class="brand-icon">⚑</span>
+        <span>HandiCap</span>
+    </div>
+    <span class="header-subtitle">Your golf companion</span>
+</header>
+
+<main class="app-main">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+        <div class="welcome">
+            <p class="eyebrow">YOUR GOLF DASHBOARD</p>
+            <h1>Ready for your next round?</h1>
+            <p>Track your scores, improve your game.</p>
+        </div>
+
+        <button class="primary-btn new-round">
+            + Start New Round
+        </button>
+
+        <div class="handicap-card">
+            <span>ESTIMATED HANDICAP</span>
+            <strong id="handicapValue">--</strong>
+            <p id="handicapStatus">Complete rounds to get started.</p>
+            <div class="progress-track">
+                <div id="progressFill"></div>
+            </div>
+            <small id="holesProgress">0 of 54 holes recorded</small>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <span>Rounds Played</span>
+                <strong id="totalRounds">0</strong>
+            </div>
+            <div class="stat-card">
+                <span>Holes Played</span>
+                <strong id="totalHoles">0</strong>
+            </div>
+        </div>
+
+        <h2>9-Hole Rounds</h2>
+        <div class="stat-grid three">
+            <div class="stat-card">
+                <span>Average</span>
+                <strong id="average9">--</strong>
+            </div>
+            <div class="stat-card">
+                <span>Best</span>
+                <strong id="best9">--</strong>
+            </div>
+            <div class="stat-card">
+                <span>Rounds</span>
+                <strong id="rounds9">0</strong>
+            </div>
+        </div>
+
+        <h2>18-Hole Rounds</h2>
+        <div class="stat-grid three">
+            <div class="stat-card">
+                <span>Average</span>
+                <strong id="average18">--</strong>
+            </div>
+            <div class="stat-card">
+                <span>Best</span>
+                <strong id="best18">--</strong>
+            </div>
+            <div class="stat-card">
+                <span>Rounds</span>
+                <strong id="rounds18">0</strong>
+            </div>
+        </div>
+
+        <div class="section-heading">
+            <h2>Recent Rounds</h2>
+            <button class="text-btn" data-page="history">View All</button>
+        </div>
+        <div id="recentRounds" class="round-list"></div>
+    </section>
+
+    <!-- START ROUND -->
+    <section id="setup" class="page">
+        <p class="eyebrow">NEW ROUND</p>
+        <h1>Let's play golf.</h1>
+        <p class="page-description">Enter your round details.</p>
+
+        <form id="roundForm" class="form-card">
+            <label for="courseName">Course Name</label>
+            <input id="courseName" type="text"
+                   placeholder="e.g. Glen Abbey" maxlength="100" required>
+
+            <label for="roundDate">Date Played</label>
+            <input id="roundDate" type="date" required>
+
+            <label>Number of Holes</label>
+            <div class="hole-choice">
+                <label>
+                    <input type="radio" name="holes" value="9">
+                    <span>9 Holes</span>
+                </label>
+                <label>
+                    <input type="radio" name="holes" value="18" checked>
+                    <span>18 Holes</span>
+                </label>
+            </div>
+
+            <label for="courseRating">Course Rating</label>
+            <input id="courseRating" type="number" min="20" max="85"
+                   step="0.1" placeholder="e.g. 72.1" required>
+
+            <label for="slopeRating">Slope Rating</label>
+            <input id="slopeRating" type="number" min="55" max="155"
+                   step="1" placeholder="e.g. 125" required>
+
+            <p class="field-note">
+                Use the rating and slope for the tees and number
+                of holes you're playing.
+            </p>
+
+            <button type="submit" class="primary-btn">Start Round</button>
+            <button type="button" class="secondary-btn"
+                    data-page="dashboard">Cancel</button>
+        </form>
+    </section>
+
+    <!-- ACTIVE ROUND -->
+    <section id="round" class="page">
+        <div class="playing-header">
+            <p class="eyebrow">ROUND IN PROGRESS</p>
+            <h1 id="activeCourse">Golf Course</h1>
+            <p id="activeDetails"></p>
+        </div>
+
+        <div class="live-summary">
+            <div>
+                <span>STROKES</span>
+                <strong id="liveStrokes">0</strong>
+            </div>
+            <div>
+                <span>TO PAR</span>
+                <strong id="liveToPar">E</strong>
+            </div>
+            <div>
+                <span>COMPLETED</span>
+                <strong id="liveCompleted">0/18</strong>
+            </div>
+        </div>
+
+        <div class="current-hole-banner">
+            <div>
+                <small>YOU'RE PLAYING</small>
+                <strong id="currentHoleLabel">Hole 1</strong>
+            </div>
+            <div class="hole-navigation">
+                <button id="previousHole" aria-label="Previous hole">←</button>
+                <button id="nextHole" aria-label="Next hole">→</button>
+            </div>
+        </div>
+
+        <div class="section-heading">
+            <h2>Scorecard</h2>
+            <span class="helper-text">Tap a hole to select it</span>
+        </div>
+
+        <div id="scorecard" class="scorecard-list"></div>
+
+        <button id="finishRound" class="primary-btn">
+            Finish Round
+        </button>
+        <button id="discardRound" class="danger-text-btn">
+            Discard Round
+        </button>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="page">
+        <p class="eyebrow">YOUR PROGRESS</p>
+        <h1>Round History</h1>
+        <p class="page-description">Every round, all in one place.</p>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="9">9 Holes</button>
+            <button class="filter-btn" data-filter="18">18 Holes</button>
+        </div>
+
+        <div id="historyRounds" class="round-list"></div>
+    </section>
+
+    <!-- SAVED ROUND DETAILS -->
+    <section id="roundDetails" class="page">
+        <button id="backToHistory" class="text-btn back-link">
+            ← Back to History
+        </button>
+
+        <p class="eyebrow">COMPLETED ROUND</p>
+        <h1 id="detailsCourse">Golf Course</h1>
+        <p id="detailsDate" class="page-description"></p>
+
+        <div class="live-summary">
+            <div>
+                <span>STROKES</span>
+                <strong id="detailsStrokes">0</strong>
+            </div>
+            <div>
+                <span>TO PAR</span>
+                <strong id="detailsToPar">E</strong>
+            </div>
+            <div>
+                <span>HOLES</span>
+                <strong id="detailsHoles">18</strong>
+            </div>
+        </div>
+
+        <h2>Hole-by-Hole Scorecard</h2>
+        <div id="detailsScorecard" class="details-scorecard"></div>
+
+        <h2>Round Information</h2>
+        <div class="info-card">
+            <div><span>Course Rating</span><strong id="detailsRating">--</strong></div>
+            <div><span>Slope Rating</span><strong id="detailsSlope">--</strong></div>
+            <div><span>Score Differential</span><strong id="detailsDifferential">--</strong></div>
+        </div>
+
+        <button id="editDifferential" class="secondary-btn">
+            Edit Published Differential
+        </button>
+        <button id="deleteDetailsRound" class="danger-text-btn">
+            Delete This Round
+        </button>
+    </section>
+
+</main>
+
+<nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn active" data-page="dashboard">
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+    </button>
+    <button class="nav-btn" data-page="round">
+        <span class="nav-icon">⚑</span>
+        <span>Play</span>
+    </button>
+    <button class="nav-btn" data-page="history">
+        <span class="nav-icon">▤</span>
+        <span>History</span>
+    </button>
+</nav>
+
+</body>
+</html>

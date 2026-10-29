@@ -1,0 +1,19 @@
+{
+  "name": "HandiCap - Golf Score Tracker",
+  "short_name": "HandiCap",
+  "description": "Track your golf rounds, scores, and estimated handicap.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f2",
+  "theme_color": "#102b22",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

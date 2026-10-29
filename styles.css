@@ -1,0 +1,788 @@
+:root {
+    --forest: #102b22;
+    --green: #285b43;
+    --lime: #c4e49a;
+    --background: #f5f7f2;
+    --white: #ffffff;
+    --text: #20362b;
+    --muted: #78877d;
+    --border: #e1e9df;
+    --danger: #b84b4b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 sans-serif;
+    background: var(--background);
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.app-header {
+    background: var(--forest);
+    color: white;
+    padding: calc(18px + env(safe-area-inset-top)) 20px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.brand-icon {
+    color: var(--lime);
+    font-size: 30px;
+}
+
+.header-subtitle {
+    font-size: 11px;
+    color: #b6cebe;
+}
+
+.app-main {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 24px 16px calc(110px + env(safe-area-inset-bottom));
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    margin: 5px 0 8px;
+    font-size: clamp(27px, 7vw, 35px);
+    letter-spacing: -0.8px;
+}
+
+h2 {
+    font-size: 19px;
+    margin: 28px 0 14px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.welcome > p:last-child,
+.page-description,
+.playing-header > p:last-child {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: block;
+    width: 100%;
+    min-height: 54px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 750;
+    padding: 14px;
+}
+
+.primary-btn {
+    background: var(--green);
+    border: none;
+    color: white;
+}
+
+.primary-btn:disabled {
+    opacity: 0.5;
+}
+
+.secondary-btn {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--green);
+    margin-top: 12px;
+}
+
+.welcome + .primary-btn {
+    margin-top: 25px;
+}
+
+.handicap-card {
+    background: var(--forest);
+    color: white;
+    border-radius: 20px;
+    padding: 24px;
+    margin-top: 20px;
+}
+
+.handicap-card > span,
+.handicap-card small {
+    font-size: 11px;
+    color: #c0d6c6;
+    letter-spacing: 0.5px;
+}
+
+.handicap-card > strong {
+    display: block;
+    font-size: 58px;
+    line-height: 1.2;
+    margin: 12px 0;
+}
+
+.handicap-card p {
+    color: #c0d6c6;
+    font-size: 13px;
+}
+
+.progress-track {
+    height: 7px;
+    border-radius: 20px;
+    background: #365648;
+    margin: 18px 0 10px;
+    overflow: hidden;
+}
+
+#progressFill {
+    height: 100%;
+    width: 0;
+    background: var(--lime);
+    border-radius: inherit;
+    transition: width 0.25s;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.stat-grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 16px 12px;
+    min-width: 0;
+}
+
+.stat-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 26px;
+    margin-top: 8px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.section-heading h2 {
+    margin-bottom: 14px;
+}
+
+.text-btn {
+    border: 0;
+    background: none;
+    color: var(--green);
+    font-weight: 750;
+    padding: 8px 0;
+}
+
+.helper-text {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* NEW ROUND */
+
+.form-card {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    margin-top: 24px;
+}
+
+.form-card > label {
+    display: block;
+    font-size: 13px;
+    font-weight: 750;
+    margin: 18px 0 8px;
+}
+
+.form-card > label:first-child {
+    margin-top: 0;
+}
+
+.form-card > input {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 12px;
+    background: #fff;
+    color: var(--text);
+    font-size: 16px;
+}
+
+.form-card input:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 1px;
+}
+
+.hole-choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.hole-choice label {
+    position: relative;
+}
+
+.hole-choice input {
+    position: absolute;
+    opacity: 0;
+}
+
+.hole-choice span {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    border-radius: 11px;
+    background: var(--background);
+    border: 2px solid var(--border);
+    font-weight: 700;
+}
+
+.hole-choice input:checked + span {
+    background: #eaf4e4;
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.field-note {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.form-card .primary-btn {
+    margin-top: 24px;
+}
+
+/* ACTIVE ROUND */
+
+.playing-header {
+    margin-bottom: 20px;
+}
+
+.live-summary {
+    background: var(--forest);
+    border-radius: 17px;
+    padding: 18px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    text-align: center;
+    color: white;
+    margin: 18px 0;
+}
+
+.live-summary span {
+    display: block;
+    color: #bdd3c4;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+.live-summary strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 7px;
+}
+
+.current-hole-banner {
+    background: #e4efd9;
+    border: 1px solid #c9dfb9;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current-hole-banner small {
+    display: block;
+    font-size: 10px;
+    font-weight: 750;
+    color: var(--green);
+    letter-spacing: 1px;
+}
+
+.current-hole-banner strong {
+    display: block;
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.hole-navigation {
+    display: flex;
+    gap: 8px;
+}
+
+.hole-navigation button {
+    width: 43px;
+    height: 43px;
+    border: 0;
+    border-radius: 11px;
+    background: var(--green);
+    color: white;
+    font-size: 22px;
+}
+
+.hole-navigation button:disabled {
+    opacity: 0.3;
+}
+
+.scorecard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+/* COMPACT HOLES */
+
+.hole-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 12px;
+    scroll-margin-top: 18px;
+}
+
+.hole-card-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hole-number {
+    min-width: 65px;
+}
+
+.hole-number small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.hole-number strong {
+    display: block;
+    font-size: 19px;
+}
+
+.par-select {
+    background: var(--background);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 9px 5px;
+    font-size: 13px;
+}
+
+.hole-score {
+    flex: 1;
+    text-align: center;
+    min-width: 45px;
+}
+
+.hole-score strong {
+    display: block;
+    font-size: 24px;
+}
+
+.hole-score span {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.score-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.score-controls button {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 11px;
+    font-size: 24px;
+    font-weight: 650;
+}
+
+.minus-btn {
+    background: #e9f1e6;
+    color: var(--green);
+}
+
+.plus-btn {
+    background: var(--green);
+    color: white;
+}
+
+.score-controls button:disabled {
+    opacity: 0.3;
+}
+
+/* CURRENT HOLE - EXPANDED */
+
+.hole-card.current {
+    border: 2px solid var(--green);
+    background: #f0f7ea;
+    padding: 20px 16px;
+    box-shadow: 0 5px 20px #102b2212;
+}
+
+.hole-card.current .hole-card-main {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 16px;
+}
+
+.hole-card.current .hole-number {
+    flex: 1;
+}
+
+.hole-card.current .hole-number strong {
+    font-size: 30px;
+}
+
+.hole-card.current .par-select {
+    font-size: 16px;
+    padding: 12px;
+}
+
+.hole-card.current .hole-score {
+    order: 3;
+    flex: 0 0 100%;
+}
+
+.hole-card.current .hole-score strong {
+    font-size: 48px;
+}
+
+.hole-card.current .hole-score span {
+    font-size: 14px;
+}
+
+.hole-card.current .score-controls {
+    order: 4;
+    flex: 0 0 100%;
+    justify-content: center;
+    gap: 26px;
+}
+
+.hole-card.current .score-controls button {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    font-size: 32px;
+}
+
+.current-badge {
+    display: none;
+}
+
+.hole-card.current .current-badge {
+    display: block;
+    margin-top: 14px;
+    color: var(--green);
+    text-align: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.hole-card.completed:not(.current) {
+    border-left: 4px solid #6ca375;
+}
+
+.danger-text-btn {
+    display: block;
+    margin: 18px auto;
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    padding: 12px;
+    font-weight: 700;
+}
+
+/* HISTORY */
+
+.filter-bar {
+    display: flex;
+    gap: 8px;
+    margin: 24px 0 16px;
+}
+
+.filter-btn {
+    flex: 1;
+    border: 1px solid var(--border);
+    background: white;
+    padding: 12px 5px;
+    border-radius: 12px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.filter-btn.active {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+}
+
+.round-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.round-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 15px;
+}
+
+.round-open {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    padding: 0;
+    text-align: left;
+    color: var(--text);
+}
+
+.round-open strong,
+.round-open small {
+    display: block;
+}
+
+.round-open strong {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.round-open small {
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.round-result {
+    text-align: right;
+}
+
+.round-result strong,
+.round-result small {
+    display: block;
+}
+
+.round-result strong {
+    font-size: 22px;
+}
+
+.round-result small {
+    color: var(--muted);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 35px 20px;
+    color: var(--muted);
+    background: white;
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+}
+
+/* SAVED ROUND DETAILS */
+
+.back-link {
+    margin-bottom: 20px;
+}
+
+.details-scorecard {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    overflow-x: auto;
+}
+
+.scorecard-table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    text-align: center;
+}
+
+.scorecard-table th,
+.scorecard-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 13px 10px;
+    font-size: 13px;
+}
+
+.scorecard-table th {
+    background: #eaf2e7;
+}
+
+.scorecard-table td:first-child {
+    text-align: left;
+    font-weight: 800;
+}
+
+.score-under {
+    color: #228348;
+    font-weight: 800;
+}
+
+.score-over {
+    color: var(--danger);
+    font-weight: 800;
+}
+
+.info-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+    display: grid;
+    gap: 16px;
+}
+
+.info-card div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-card span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.info-card strong {
+    font-size: 19px;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+    z-index: 100;
+}
+
+.nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.nav-btn.active {
+    color: var(--green);
+}
+
+.nav-icon {
+    font-size: 27px;
+    line-height: 1.1;
+}
+
+button:focus-visible,
+.round-open:focus-visible {
+    outline: 3px solid var(--lime);
+    outline-offset: 3px;
+}
+
+@media (min-width: 650px) {
+    .app-header {
+        justify-content: center;
+        gap: 80px;
+    }
+
+    .bottom-nav {
+        max-width: 620px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+    }
+}
